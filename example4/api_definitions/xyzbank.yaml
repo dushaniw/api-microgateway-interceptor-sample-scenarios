@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  description: This is a mock backend for XYZ Bank
+  version: 1.0.0
+  title: XYZBANK
+x-wso2-basePath: /xyzbank/v1
+x-wso2-production-endpoints:
+  urls:
+    - "http://www.mocky.io/v2/5d2dc2b82e00005900c580f2"
+x-wso2-request-interceptor: setAuthHeaderInRequest
+paths:
+  /account/{accountId}:
+    get:
+      parameters:
+        - name: accountId
+          in: path
+          description: accountId
+          required: true
+          schema:
+            type: string
+      summary: Get Account details by Id
+      operationId: getAccount
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Account"
+        "400":
+          description: Invalid status value
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        firstname:
+          type: string
+          example: Dushani
+        lastname:
+          type: string
+          example: Wellappili
+        address:
+          type: string
+          example: Matara
+        mobile:
+          type: string
+          example: 0778324324
+  requestBodies:
+    Weather:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Account"
+      description: Account object
+      required: true
